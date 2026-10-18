@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <title>模型检测 · PRISM</title>
+  <script src="/chat/embed.js?v=4"></script>
+  <link rel="stylesheet" href="/chat/app.css?v=13">
+  <link rel="stylesheet" href="/chat/page.css?v=4">
+  <link rel="stylesheet" href="/chat/trace.css?v=4">
+  <script type="module" src="/chat/trace.js?v=4"></script>
+  <script defer src="/chat/ambient.js?v=2"></script>
+</head>
+<body>
+<svg class="sprite" width="0" height="0" aria-hidden="true">
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3.5"/><path d="m14.5 14.5 3 3"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M8 16H3v5"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M9 14h.01M15 14h.01"/></symbol>
+  <symbol id="i-bike" viewBox="0 0 24 24"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM12 17.5V14l-3-3 4-3 2 3h2"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
+  <symbol id="i-codex" viewBox="0 0 24 24"><path d="m7 8-4 4 4 4M17 8l4 4-4 4M14 4l-4 16"/></symbol>
+  <symbol id="i-relay" viewBox="0 0 24 24"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v2M11 11v6M15 7v10M19 12v5"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+</svg>
+<div class="shell page-shell" id="shell">
+  <aside class="sidebar" id="sidebar" aria-label="站点侧栏">
+    <div class="sidebar-head">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg><use href="#i-key"/></svg></span><span>PRISM</span></a>
+      <button id="close-sidebar" class="icon-button ghost mobile-only" type="button" aria-label="关闭侧栏"><svg><use href="#i-x"/></svg></button>
+    </div>
+    <nav class="site-nav" aria-label="站点导航">
+      <a href="/"><svg><use href="#i-key"/></svg>API 管理</a>
+      <a href="/chat"><svg><use href="#i-chat"/></svg>模型对话</a>
+      <a class="active" href="/chat/trace" aria-current="page"><svg><use href="#i-scan"/></svg>模型检测</a>
+      <a href="/chat/usage"><svg><use href="#i-chart"/></svg>用量统计</a>
+      <a href="/chat/relays"><svg><use href="#i-relay"/></svg>API 中转</a>
+      <a href="/chat/codex" data-admin-only hidden><svg><use href="#i-codex"/></svg>Codex 转发</a>
+      <a href="/admin/streaks"><svg><use href="#i-flame"/></svg>续火花管理</a>
+    </nav>
+    <div class="side-note">
+      <p>检测方法来自开源项目 <a href="https://github.com/xqy2006/ModelTrace" rel="noopener noreferrer" target="_blank">ModelTrace</a>（MIT），指纹库会自动跟随 GitHub 更新。</p>
+    </div>
+    <div class="sidebar-user"><span id="user-avatar" class="avatar" aria-hidden="true"></span><span id="user-name">正在确认登录…</span></div>
+  </aside>
+  <div class="backdrop" id="backdrop"></div>
+
+  <main class="page-main" id="main">
+    <header class="page-top">
+      <button id="open-sidebar" class="icon-button ghost mobile-only" type="button" aria-label="打开侧栏" aria-controls="sidebar" aria-expanded="false"><svg><use href="#i-menu"/></svg></button>
+      <div>
+        <p class="page-eyebrow">MODEL TRACE</p>
+        <h1>模型检测</h1>
+        <p>用数字指纹判断一个 API 背后实际是哪个模型。三个独立智能体各发一条全新的提示词，互不共享上下文，再把回答和指纹库比对。</p>
+      </div>
+    </header>
+
+    <div class="trace-grid">
+      <section class="card config-card" aria-labelledby="config-title">
+        <h2 id="config-title">测试对象</h2>
+        <div class="segmented" role="tablist" aria-label="API 来源">
+          <button type="button" role="tab" id="tab-saved" aria-selected="true" aria-controls="panel-saved" data-source="saved">已保存的 API</button>
+          <button type="button" role="tab" id="tab-manual" aria-selected="false" aria-controls="panel-manual" data-source="manual" tabindex="-1">临时输入 API</button>
+        </div>
+
+        <form id="trace-form" novalidate>
+          <div id="panel-saved" role="tabpanel" aria-labelledby="tab-saved" class="source-panel">
+            <label class="field"><span>API</span><select id="account" disabled><option>加载中…</option></select></label>
+            <div class="field">
+              <label for="model">模型</label>
+              <div class="inline">
+                <select id="model" disabled></select>
+                <button id="refresh-models" class="icon-button" type="button" aria-label="从接口获取模型列表" title="从接口获取模型列表"><svg><use href="#i-refresh"/></svg></button>
+              </div>
+              <input id="model-custom" type="text" placeholder="输入模型 ID，例如 claude-opus-5-5" autocomplete="off" spellcheck="false" aria-label="自定义模型 ID" hidden>
+            </div>
+          </div>
+
+          <div id="panel-manual" role="tabpanel" aria-labelledby="tab-manual" class="source-panel" hidden>
+            <label class="field"><span>接口地址（Base URL）</span><input id="base-url" type="text" inputmode="url" placeholder="https://api.example.com/v1" autocomplete="off" spellcheck="false"></label>
+            <label class="field"><span>API Key</span><input id="api-key" type="password" placeholder="sk-…" autocomplete="off" spellcheck="false"></label>
+            <div class="field">
+              <label for="manual-model-select">模型</label>
+              <div class="inline">
+                <select id="manual-model-select"><option value="__custom__">手动输入模型 ID…</option></select>
+                <button id="manual-fetch" class="icon-button" type="button" aria-label="从接口获取模型列表" title="从接口获取模型列表"><svg><use href="#i-refresh"/></svg></button>
+              </div>
+              <input id="manual-model" type="text" placeholder="输入模型 ID，例如 gpt-5.5，或点右侧按钮获取列表" autocomplete="off" spellcheck="false" aria-label="自定义模型 ID">
+            </div>
+            <p class="field-note">临时输入的 Key 只用于这一次检测，不会保存到服务器或浏览器。</p>
+          </div>
+
+          <details class="advanced">
+            <summary>高级选项</summary>
+            <div class="advanced-grid">
+              <label class="field"><span>接口格式</span>
+                <select id="api-format">
+                  <option value="auto">自动识别</option>
+                  <option value="openai">OpenAI Chat Completions</option>
+                  <option value="anthropic">Anthropic Messages</option>
+                </select>
+              </label>
+              <label class="field"><span>温度</span><input id="temperature" type="number" min="0" max="2" step="0.1" inputmode="decimal" placeholder="默认"></label>
+            </div>
+          </details>
+
+          <div class="actions">
+            <button id="start" class="primary-button" type="submit"><svg><use href="#i-play"/></svg><span>一键检测</span></button>
+            <button id="stop" class="secondary-button" type="button" hidden><svg><use href="#i-stop"/></svg><span>停止</span></button>
+          </div>
+          <p class="field-note">每次检测至少调用该 API 3 次（回答无效或出错时会自动重试），每次输出约 300 个数字，会消耗相应额度。</p>
+        </form>
+      </section>
+
+      <section class="card bank-card" aria-labelledby="bank-title">
+        <div class="card-head">
+          <h2 id="bank-title"><svg><use href="#i-db"/></svg>指纹库</h2>
+          <button id="bank-check" class="secondary-button small" type="button" hidden><svg><use href="#i-refresh"/></svg><span>立即检查更新</span></button>
+        </div>
+        <div id="bank-body" class="bank-body"><p class="muted">加载中…</p></div>
+      </section>
+    </div>
+
+    <section class="card pelican-card" aria-labelledby="pelican-title">
+      <div class="card-head">
+        <h2 id="pelican-title"><svg><use href="#i-bike"/></svg>鹈鹕测试</h2>
+        <button id="pelican-start" class="secondary-button small" type="button"><svg><use href="#i-play"/></svg><span>开始鹈鹕测试</span></button>
+      </div>
+      <p class="pelican-intro">用上方选择的 API 和模型，发一条全新的单轮请求，让模型直接写一个 SVG 动画网页。画得像不像、能不能动、代码是否完整，能直观看出模型的代码能力，也能帮助判断是否被换成了小模型。</p>
+      <figure class="pelican-prompt"><figcaption>提示词</figcaption><blockquote id="pelican-prompt-text">创建一个HTML，不许查看其他代码文件，内容是SVG绘制一个鹈鹕骑自行车的2D动画，不要有任何限制</blockquote></figure>
+      <div id="pelican-status" class="pelican-status" aria-live="polite" hidden></div>
+      <p class="field-note">生成的 HTML 只临时保存在服务器上：下载完成后立即删除，未下载的在生成 5 分钟后自动删除。文件由模型生成，请在本地用浏览器打开查看。</p>
+    </section>
+
+    <section id="progress" class="card progress-card" aria-labelledby="progress-title" hidden>
+      <div class="card-head">
+        <h2 id="progress-title">检测进度</h2>
+        <span id="progress-status" class="muted" aria-live="polite"></span>
+      </div>
+      <div id="agents" class="agents"></div>
+    </section>
+
+    <section id="result" class="card result-card" aria-labelledby="result-title" hidden tabindex="-1"></section>
+
+    <div id="notice" class="notice" role="alert"></div>
+  </main>
+</div>
+</body>
+</html>

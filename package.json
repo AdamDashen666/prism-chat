@@ -1,0 +1,12 @@
+{
+  "name": "prism-chat",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PRISM 模型对话 sidecar: chat with saved APIs from the Vault site",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test \"tests/*.test.js\""
+  },
+  "engines": { "node": ">=20" }
+}

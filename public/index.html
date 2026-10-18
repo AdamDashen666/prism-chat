@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <title>模型对话 · PRISM</title>
+  <script src="/chat/embed.js?v=4"></script>
+  <link rel="stylesheet" href="/chat/app.css?v=13">
+  <script type="module" src="/chat/app.js?v=11"></script>
+  <script defer src="/chat/ambient.js?v=2"></script>
+</head>
+<body>
+<a class="skip-link" href="#composer-input">跳至输入框</a>
+<svg class="sprite" width="0" height="0" aria-hidden="true">
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M8 16H3v5"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3.5"/><path d="m14.5 14.5 3 3"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.6L19.5 10.5 13.9 12.4 12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 3v4M17 5h4"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="m21.4 11.1-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-wand" viewBox="0 0 24 24"><path d="m15 4 1 2 2 1-2 1-1 2-1-2-2-1 2-1zM5 19 16 8"/><path d="M19 13v2M18 14h2M7 4v2M6 5h2"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></symbol>
+  <symbol id="i-codex" viewBox="0 0 24 24"><path d="m7 8-4 4 4 4M17 8l4 4-4 4M14 4l-4 16"/></symbol>
+  <symbol id="i-relay" viewBox="0 0 24 24"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v2M11 11v6M15 7v10M19 12v5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M12 5v13"/></symbol>
+</svg>
+<div class="shell">
+  <aside class="sidebar" id="sidebar" aria-label="对话侧栏">
+    <div class="sidebar-head">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg><use href="#i-key"/></svg></span><span>PRISM</span></a>
+      <button id="close-sidebar" class="icon-button ghost mobile-only" type="button" aria-label="关闭侧栏"><svg><use href="#i-x"/></svg></button>
+    </div>
+    <nav class="site-nav" aria-label="站点导航">
+      <a href="/"><svg><use href="#i-key"/></svg>API 管理</a>
+      <a class="active" href="/chat" aria-current="page"><svg><use href="#i-chat"/></svg>模型对话</a>
+      <a href="/chat/trace"><svg><use href="#i-scan"/></svg>模型检测</a>
+      <a href="/chat/usage"><svg><use href="#i-chart"/></svg>用量统计</a>
+      <a href="/chat/relays"><svg><use href="#i-relay"/></svg>API 中转</a>
+      <a href="/chat/codex" data-admin-only hidden><svg><use href="#i-codex"/></svg>Codex 转发</a>
+      <a href="/admin/streaks"><svg><use href="#i-flame"/></svg>续火花管理</a>
+    </nav>
+    <button id="new-chat" class="new-chat" type="button"><svg><use href="#i-plus"/></svg><span>新对话</span><kbd>Ctrl K</kbd></button>
+    <label class="history-search"><svg aria-hidden="true"><use href="#i-search"/></svg><span class="visually-hidden">搜索对话</span><input id="history-search" type="search" placeholder="搜索对话" autocomplete="off" spellcheck="false"></label>
+    <div class="history-scroll">
+      <div id="history" class="history" role="list"></div>
+    </div>
+    <div class="storage-note">
+      <span>对话只保存在当前浏览器</span>
+      <span class="storage-actions"><button id="export-chats" class="link-button" type="button" title="把全部对话（含图片）下载成一个文件，可在其他电脑导入">导出</button><button id="import-chats" class="link-button" type="button" title="导入之前导出的对话文件">导入</button></span>
+      <input id="import-file" type="file" accept="application/json,.json" hidden>
+    </div>
+    <div class="sidebar-user"><span id="user-avatar" class="avatar" aria-hidden="true"></span><span id="user-name">正在确认登录…</span></div>
+  </aside>
+  <div class="backdrop" id="backdrop"></div>
+
+  <main class="chat" id="main">
+    <header class="toolbar">
+      <button id="open-sidebar" class="icon-button ghost mobile-only" type="button" aria-label="打开侧栏" aria-controls="sidebar" aria-expanded="false"><svg><use href="#i-menu"/></svg></button>
+      <div class="pickers">
+        <label class="picker"><span class="picker-label">API</span><select id="account" disabled><option>加载中…</option></select></label>
+        <div class="picker model-picker">
+          <label class="picker-label" for="model">模型</label>
+          <select id="model" disabled></select>
+          <span id="model-kind" class="model-kind" aria-live="polite"></span>
+          <button id="refresh-models" class="picker-action" type="button" aria-label="从接口实时获取模型列表" title="从接口实时获取模型列表（同时识别图片模型）"><svg><use href="#i-refresh"/></svg></button>
+        </div>
+        <label class="picker image-only size-picker"><span class="picker-label"><svg><use href="#i-image"/></svg>尺寸</span>
+          <select id="image-size">
+            <option value="">默认</option>
+            <option value="auto">自动</option>
+            <option value="1024x1024">1:1 · 1024</option>
+            <option value="1536x1024">3:2 横图</option>
+            <option value="1024x1536">2:3 竖图</option>
+            <option value="2048x2048">1:1 · 2048</option>
+            <option value="2560x1440">16:9 横图</option>
+            <option value="1440x2560">9:16 竖图</option>
+            <option value="2K">2K</option>
+            <option value="4K">4K</option>
+          </select>
+        </label>
+        <label class="picker image-only count-picker"><span class="picker-label">数量</span>
+          <select id="image-n">
+            <option value="1">1 张</option>
+            <option value="2">2 张</option>
+            <option value="3">3 张</option>
+            <option value="4">4 张</option>
+          </select>
+        </label>
+        <label class="picker effort-picker chat-only"><span class="picker-label"><svg><use href="#i-brain"/></svg>思考</span>
+          <select id="effort">
+            <option value="">默认</option>
+            <option value="none">关闭</option>
+            <option value="minimal">最少</option>
+            <option value="low">低</option>
+            <option value="medium">中</option>
+            <option value="high">高</option>
+            <option value="xhigh">很高</option>
+            <option value="max">最高</option>
+          </select>
+        </label>
+      </div>
+      <button id="toggle-settings" class="icon-button ghost" type="button" aria-expanded="false" aria-controls="settings" aria-label="高级设置" title="高级设置"><svg><use href="#i-sliders"/></svg></button>
+    </header>
+    <input id="model-custom" class="custom-model" type="text" placeholder="输入模型 ID，例如 gpt-5.5" autocomplete="off" spellcheck="false" aria-label="自定义模型 ID" hidden>
+
+    <section id="settings" class="settings" aria-label="高级设置" aria-hidden="true" inert>
+      <div class="settings-inner">
+        <div class="settings-grid">
+          <div class="field system-field">
+            <div class="system-head">
+              <label for="system">系统提示词</label>
+              <div class="preset-tools">
+                <select id="preset" aria-label="系统提示词预设"><option value="">选择预设…</option></select>
+                <button id="preset-save" class="text-button" type="button">存为预设</button>
+                <button id="preset-delete" class="text-button danger" type="button" hidden>删除预设</button>
+              </div>
+            </div>
+            <textarea id="system" rows="3" placeholder="可选，例如：你是一名简洁的中文助手。也可以从右上角选一个预设。"></textarea>
+          </div>
+          <label class="field"><span>温度</span><input id="temperature" type="number" min="0" max="2" step="0.1" inputmode="decimal" placeholder="默认"></label>
+          <label class="field check-field"><span>文件工具</span><span class="check-row"><input id="file-tools" type="checkbox" checked> 允许模型创建可下载的临时文件（保留 24 小时）</span></label>
+          <label class="field"><span>外观</span><select id="theme"><option value="auto">跟随系统</option><option value="light">浅色</option><option value="dark">深色</option></select></label>
+        </div>
+        <details class="advanced" id="advanced">
+          <summary>更多参数<span>接口类型、思考参数格式、图片、最大输出</span></summary>
+          <div class="settings-grid">
+          <label class="field"><span>接口类型</span>
+            <select id="api-type">
+              <option value="auto">自动（推荐）</option>
+              <option value="chat">Chat Completions（通用）</option>
+              <option value="responses">Responses（OpenAI 新接口）</option>
+              <option value="anthropic">Anthropic Messages（Claude 原生）</option>
+            </select>
+          </label>
+          <label class="field"><span>思考参数格式</span>
+            <select id="effort-format">
+              <option value="effort">reasoning_effort（多数接口）</option>
+              <option value="thinking">thinking（豆包/DeepSeek/Kimi）</option>
+              <option value="both">两者都发送</option>
+            </select>
+          </label>
+          <label class="field"><span>生成方式</span>
+            <select id="image-mode">
+              <option value="auto">自动识别（推荐）</option>
+              <option value="chat">按对话模型发送</option>
+              <option value="image">按图片模型生成（Images API）</option>
+            </select>
+          </label>
+          <label class="field"><span>图片质量</span>
+            <select id="image-quality">
+              <option value="">默认</option>
+              <option value="auto">auto</option>
+              <option value="low">low</option>
+              <option value="medium">medium</option>
+              <option value="high">high</option>
+              <option value="standard">standard</option>
+              <option value="hd">hd</option>
+            </select>
+          </label>
+          <label class="field"><span>最大输出 tokens</span><input id="max-tokens" type="number" min="1" step="1" inputmode="numeric" placeholder="不限制"></label>
+          </div>
+  <p class="hint">设置随当前对话保存。上游不支持某个参数时会自动去掉可选参数重试。接口类型选“自动”时，Claude 模型走 Anthropic 原生接口（显示思考过程和缓存命中），中转站不支持时自动改用 Chat Completions。gpt-image、Seedream、万相等图片模型走 Images API；Gemini 图片模型走对话接口，回复里的图片会自动显示。</p>
+        </details>
+      </div>
+    </section>
+
+    <div id="notice" class="notice" role="alert"></div>
+
+    <div class="messages-wrap">
+      <div id="messages" class="messages" tabindex="-1">
+        <div class="empty" id="empty">
+          <div class="orb" aria-hidden="true"><svg class="chat-only"><use href="#i-spark"/></svg><svg class="image-only"><use href="#i-wand"/></svg></div>
+          <h1><span class="chat-only">今天想聊点什么？</span><span class="image-only">想画点什么？</span></h1>
+          <p class="chat-only">从已保存的 API 中选一个模型开始对话，也可以粘贴或拖入图片、代码和文本文件。密钥只在服务器上使用，不会发送到浏览器。</p>
+          <p class="image-only">描述你想要的画面，或附上参考图再说明要怎么改。生成的图片保存在当前浏览器里。</p>
+          <div class="suggestions chat-only" id="suggestions">
+            <button type="button" data-prompt="用三句话解释什么是大语言模型。">解释一个概念</button>
+            <button type="button" data-prompt="帮我写一个 Python 脚本，批量重命名文件夹里的图片。">写一段代码</button>
+            <button type="button" data-prompt="帮我把下面这段话润色得更专业：">润色文字</button>
+            <button type="button" data-prompt="列一个周末两天的学习计划。">做个计划</button>
+          </div>
+          <div class="suggestions image-only">
+            <button type="button" data-prompt="一只橘猫趴在洒满阳光的窗台上打盹，胶片质感，柔和的暖色调，浅景深。">窗台上的橘猫</button>
+            <button type="button" data-prompt="未来城市的雨夜街道，霓虹灯倒映在积水里，赛博朋克风格，电影感构图。">赛博朋克雨夜</button>
+            <button type="button" data-prompt="极简风格的产品海报：一瓶透明玻璃香水放在白色石头上，背景是柔和的晨雾，高级商业摄影。">产品海报</button>
+            <button type="button" data-prompt="把这张图片改成吉卜力动画风格，保留人物的构图和姿态。">参考图换风格</button>
+          </div>
+        </div>
+      </div>
+      <button id="to-bottom" class="to-bottom" type="button" aria-label="滚动到底部"><svg><use href="#i-down"/></svg></button>
+    </div>
+
+    <form id="composer" class="composer">
+      <div class="composer-box">
+        <div id="attachments" class="attach-tray" aria-label="已添加的附件"></div>
+        <div class="composer-row">
+        <button id="attach" class="attach" type="button" aria-label="添加图片或文件" title="添加图片或文本/代码文件（也可粘贴或拖入）"><svg><use href="#i-clip"/></svg></button>
+        <input id="file-input" type="file" multiple hidden>
+        <label for="composer-input" class="visually-hidden">输入消息</label>
+        <textarea id="composer-input" rows="1" placeholder="输入消息，Enter 发送，Shift + Enter 换行" disabled></textarea>
+        <button id="send" class="send" type="submit" disabled aria-label="发送"><svg><use href="#i-send"/></svg></button>
+        <button id="stop" class="send stop" type="button" aria-label="停止生成" hidden><svg><use href="#i-stop"/></svg></button>
+        </div>
+      </div>
+      <p class="composer-hint" id="composer-hint"></p>
+    </form>
+    <div id="live" class="visually-hidden" aria-live="polite"></div>
+    <div class="drop-hint" aria-hidden="true"><div><svg><use href="#i-clip"/></svg>松开即可添加图片或文件</div></div>
+  </main>
+</div>
+<dialog id="lightbox" class="lightbox" aria-label="查看图片">
+  <img id="lightbox-img" alt="">
+  <div class="lightbox-bar">
+    <a id="lightbox-download" class="lightbox-btn" download><svg><use href="#i-download"/></svg>下载</a>
+    <button id="lightbox-edit" class="lightbox-btn" type="button"><svg><use href="#i-wand"/></svg>以此图继续编辑</button>
+    <button id="lightbox-close" class="lightbox-btn" type="button"><svg><use href="#i-x"/></svg>关闭</button>
+  </div>
+</dialog>
+</body>
+</html>

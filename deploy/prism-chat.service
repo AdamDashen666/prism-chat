@@ -1,0 +1,45 @@
+[Unit]
+Description=PRISM model chat (uses saved APIs via Vault session)
+After=network-online.target prism-vault.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=prism-chat
+Group=prism-chat
+WorkingDirectory=/opt/prism-chat/current
+Environment=NODE_ENV=production
+Environment=PORT=4320
+Environment=VAULT_PORT=5080
+Environment=PUBLIC_ORIGIN=https://qiuzhang.xyz
+# Finished image jobs (kept 24 h so slow/broken downloads can resume).
+StateDirectory=prism-chat
+StateDirectoryMode=0700
+Environment=JOB_DIR=/var/lib/prism-chat/jobs
+# ModelTrace fingerprint bank auto-updated from GitHub (data only, schema + self-test checked).
+Environment=TRACE_DIR=/var/lib/prism-chat/trace
+ExecStart=/opt/streak-runtime/node/bin/node src/server.js
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+UMask=0077
+MemoryHigh=200M
+MemoryMax=320M
+TasksMax=64
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+LockPersonality=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+LimitCORE=0
+
+[Install]
+WantedBy=multi-user.target

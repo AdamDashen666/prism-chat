@@ -1,0 +1,14 @@
+{
+  "repo": "xqy2006/ModelTrace",
+  "branch": "main",
+  "sha": "d4131b30243dfa05e70180b5eedde742103f1d73",
+  "committedAt": "2026-10-01T06:09:42+08:00",
+  "bankSha256": "e514c76928ea38d23bc0f14d3935f23c97b1efb6d96b18a19bdc88ad2d830536",
+  "builtAt": "2026-09-30T22:05:57.774800+00:00",
+  "algorithm": {
+    "fingerprint.py": "387fe5c44cc5f859995432267b0d3b462fc26e82419fc22e3ee7f36cc2502d98",
+    "static/fingerprint-core.js": "83fa5bd611e18f8339122582335123c8ea168ed242298bb31f4e363abeeb6e4a",
+    "static/challenge-browser.js": "4a3868c9fe237cabde92f0d2bffaf32118f558f7a43fcc336874fecd2bf6be39",
+    "challenge_suite.py": "aeebf20878ce11864c5cb7b1f6c0c7c2cf6dcfbb934244ff868b369e08a15032"
+  }
+}

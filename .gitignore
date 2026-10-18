@@ -1,0 +1,10 @@
+node_modules/
+.state/
+.trace/
+.jobs/
+*.tgz
+.env
+.env.*
+*.key
+*.pem
+*.dpapi
